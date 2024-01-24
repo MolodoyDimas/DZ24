@@ -7,8 +7,6 @@ class Course(models.Model):
     picture = models.ImageField(upload_to='course/', verbose_name='Картинка', blank=True, null=True)
     description = models.CharField(max_length=500, verbose_name='Описание')
 
-    #lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='Курс', blank=True, null=True)
-
     def __str__(self):
         return f'{self.name_course}'
 
@@ -37,7 +35,7 @@ class Lesson(models.Model):
 
 class Payments(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True, related_name='payments')
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     payment_date = models.PositiveIntegerField(verbose_name='Дата платежа', null=True, blank=True)
