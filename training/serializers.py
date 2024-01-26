@@ -2,15 +2,13 @@ from rest_framework import serializers
 from training.models import Course, Lesson, Payments
 
 
-class CourseSerializer(serializers.ModelSerializer):
-    lesson_count = serializers.SerializerMethodField()
+class Meta:
+    model = Course
+    fields = '__all__'
 
-    class Meta:
-        model = Course
-        fields = '__all__'
 
-    def get_lesson_count(self, obj):
-        return obj.lesson_set.count()
+def get_lesson_count(self, obj):
+    return obj.lesson_set.count()
 
 
 class LessonSerializer(serializers.ModelSerializer):
@@ -23,6 +21,11 @@ class PaymentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payments
         fields = "__all__"
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    lesson_count = serializers.SerializerMethodField()
+    lessons = LessonSerializer(source='lesson_set')
 
 
 class CourseCreateSerializer(serializers.ModelSerializer):
