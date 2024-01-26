@@ -25,15 +25,7 @@ class PaymentsSerializer(serializers.ModelSerializer):
 
 class CourseSerializer(serializers.ModelSerializer):
     lesson_count = serializers.SerializerMethodField()
-    lessons = LessonSerializer(source='lesson_set')
-
-
-class CourseCreateSerializer(serializers.ModelSerializer):
-    payments = PaymentsSerializer(many=True)
-
-    class Meta:
-        model = Course
-        fields = "__all__"
+    lessons = LessonSerializer(many=True, read_only=True, source='lesson_set')
 
     def create(self, validated_data):
         payments = validated_data.pop('payments')
