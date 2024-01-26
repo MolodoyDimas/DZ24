@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
-from training.serializers import CourseSerializer, LessonSerializer, PaymentsSerializer, CourseCreateSerializer
+from training.serializers import CourseSerializer, LessonSerializer, PaymentsSerializer
 from training.models import Course, Lesson, Payments
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
@@ -46,6 +46,3 @@ class PaymentsCreateAPIView(generics.CreateAPIView):
     serializer_class = PaymentsSerializer
 
 
-
-class CourseCreateAPIView(generics.CreateAPIView):
-    serializer_class = CourseCreateSerializer
