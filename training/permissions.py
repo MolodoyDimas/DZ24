@@ -1,9 +1,20 @@
 from rest_framework.permissions import BasePermission
 
-class IsOwnerOrStaff(BasePermission):
+
+class IsModerator(BasePermission):
+
+    message = 'невозможно выполнить действие'
 
     def has_permission(self, request, view):
-        if request.user.is_staff:
-            return True
+        if request.user.role == 'moderator':
+            return False
+        return True
 
-        return request.user == view.get_object().owner
+
+class IsUser(BasePermission):
+    message = 'невозможно выполнить действие'
+
+    def has_object_permission(self, request, view, obj):
+        if request.user == obj.user:
+            return True
+        return False
