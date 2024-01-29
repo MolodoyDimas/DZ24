@@ -1,12 +1,12 @@
 from rest_framework import serializers
 from training.models import Course, Lesson, Payments, Subscribe
-
+from training.validators import LinkValidator
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
-
+        validators = [LinkValidator(fields='link_video')]
 
 class PaymentsSerializer(serializers.ModelSerializer):
     class Meta:

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93af6641-728f-4b37-8710-050c94300080" name="Changes" comment="25.2 выполнено">
+    <list default="true" id="93af6641-728f-4b37-8710-050c94300080" name="Changes" comment="Полностью переписан файл permissions. Добавленны 2 класса для Владельца и Модера.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/training/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,13 +98,22 @@
       <option name="project" value="LOCAL" />
       <updated>1706511503606</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Полностью переписан файл permissions. Добавленны 2 класса для Владельца и Модера.">
+      <option name="closed" value="true" />
+      <created>1706525127032</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706525127032</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Дополнены модели информацией о владельце" />
     <MESSAGE value="закончено" />
     <MESSAGE value="25.2 выполнено" />
-    <option name="LAST_COMMIT_MESSAGE" value="25.2 выполнено" />
+    <MESSAGE value="Полностью переписан файл permissions. Добавленны 2 класса для Владельца и Модера." />
+    <option name="LAST_COMMIT_MESSAGE" value="Полностью переписан файл permissions. Добавленны 2 класса для Владельца и Модера." />
   </component>
 </project>
