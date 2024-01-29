@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
-from training.serializers import CourseSerializer, LessonSerializer, PaymentsSerializer
-from training.models import Course, Lesson, Payments
+from training.serializers import CourseSerializer, LessonSerializer, PaymentsSerializer, SubscribeSerializer
+from training.models import Course, Lesson, Payments, Subscribe
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from training.permissions import IsOwnerOrStaff
 
 
@@ -55,3 +55,15 @@ class PaymentsListAPIView(generics.ListAPIView):
 
 class PaymentsCreateAPIView(generics.CreateAPIView):
     serializer_class = PaymentsSerializer
+
+
+class SubscribeViewSet(viewsets.ModelViewSet):
+    serializer_class = SubscribeSerializer
+    queryset = Subscribe.objects.all()
+    permission_classes = [AllowAny]
+    # permission_classes = [IsAuthenticated, IsUser]
+
+    def perform_create(self, serializer):
+        new_lesson = serializer.save()
+        new_lesson.user = self.request.user
+        new_lesson.save()

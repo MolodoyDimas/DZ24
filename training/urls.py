@@ -2,14 +2,15 @@ from training.apps import TrainingConfig
 from rest_framework.routers import DefaultRouter
 from training.views import (LessonCreateAPIView, LessonListAPIView, LessonRetrieveAPIView,
                             LessonUpdateAPIView, LessonDestroyAPIView, PaymentsCreateAPIView, CourseViewSet,
-                            PaymentsListAPIView)
-from django.urls import path
+                            PaymentsListAPIView, SubscribeViewSet)
+from django.urls import path, include
 
 
 app_name = TrainingConfig.name
 
 router = DefaultRouter()
 router.register(r'trainings', CourseViewSet, basename='trainings')
+router.register(r'subscribe', SubscribeViewSet, basename='subscribe')
 
 urlpatterns = [
     path('lesson/create/', LessonCreateAPIView.as_view(), name='lesson-create'),
@@ -20,4 +21,5 @@ urlpatterns = [
     path('payments/create/', PaymentsCreateAPIView.as_view(), name='payments-create'),
     path('course/', CourseViewSet.as_view({'get': 'list'}), name='course-view'),
     path('payments/', PaymentsListAPIView.as_view(), name='payments-list'),
+    path('lesson/subscribe/', include(router.urls)),
         ] + router.urls
