@@ -6,11 +6,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from training.permissions import IsUser, IsModerator
+from training.paginations import LessonPagination
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticated, IsModerator, IsUser]
+    pagination_class = LessonPagination
 
     def get_queryset(self):
         if self.request.user.role == "member":
@@ -40,6 +42,7 @@ class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [AllowAny]
+    pagination_class = LessonPagination
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
