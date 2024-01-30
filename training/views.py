@@ -7,6 +7,9 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from training.permissions import IsUser, IsModerator
 from training.paginations import LessonPagination
+from requests import Response
+from rest_framework.views import APIView
+import stripe
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -94,3 +97,31 @@ class SubscribeViewSet(viewsets.ModelViewSet):
         new_lesson = serializer.save()
         new_lesson.user = self.request.user
         new_lesson.save()
+
+
+class PaymentsCreateApiView(generics.CreateAPIView):
+    serializer_class = PaymentsSerializer
+
+    def payments_create(self, serializer):
+        new_payment = serializer.save()
+        stripe.api_key = 'pk_test_51OeDbXASb9i3kG2Vf4PrZ0b27t8CuJDWmGZ5NsjSr0vaRaJsMxndyH8msKKRYM9tEXJGvvscHjPTZvBJKdKxG3QP00vR0gmc1o'
+        payment_intent = stripe.PaymentIntent.create(
+            amount=int(new_payment.amount),
+            current='usd',
+            automatic_payment_methods={"enabled": True},
+        )
+        new_payment.session_id = payment_intent.id
+        new_payment.save()
+
+    def perform_create(self, serializer):
+        new_lesson = serializer.save()
+        new_lesson.user = self.request.user
+        new_lesson.save()
+
+
+class GetPaymentView(APIView):
+
+    def get(self, request, payment_id):
+        stripe.api_key = 'pk_test_51OeDbXASb9i3kG2Vf4PrZ0b27t8CuJDWmGZ5NsjSr0vaRaJsMxndyH8msKKRYM9tEXJGvvscHjPTZvBJKdKxG3QP00vR0gmc1o'
+        payment_intent = stripe.PaymentIntent.retrieve(payment_id)
+        return Response({'status': payment_intent.status, })

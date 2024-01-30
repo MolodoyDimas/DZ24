@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import User
 from config.settings import AUTH_USER_MODEL
+import stripe
 
 class Course(models.Model):
     name_course = models.CharField(max_length=100, verbose_name='Наименование Курса')
@@ -43,6 +44,9 @@ class Payments(models.Model):
     payment_date = models.PositiveIntegerField(verbose_name='Дата платежа', null=True, blank=True)
     amount = models.IntegerField(default=0, verbose_name='Сумма оплаты')
     method = models.BooleanField(default=True, verbose_name='Оплата переводом')  # если наличные - False
+
+    is_paid = models.BooleanField(default=False, verbose_name='статус оплаты')
+    session_id = models.CharField(max_length=150, verbose_name='id сессии', null=True, blank=True)
 
     def __str__(self):
         return f"{self.course if self.course else self.lesson} - {self.amount}"
