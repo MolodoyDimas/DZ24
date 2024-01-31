@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93af6641-728f-4b37-8710-050c94300080" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/celery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="93af6641-728f-4b37-8710-050c94300080" name="Changes" comment="ДЗ 26.1 исправлена ошибка">
+      <change afterPath="$PROJECT_DIR$/training/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/permissions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/training/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +34,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PROJECT/DZ24/manage.py&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/PROJECT/DZ24/manage.py",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PROJECT\DZ24\users" />
@@ -143,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706608674990</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ДЗ 26.1 исправлена ошибка">
+      <option name="closed" value="true" />
+      <created>1706701255834</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706701255834</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -154,6 +156,7 @@
     <MESSAGE value="Класс training.LessonSerializer дополнен проверкой ссылки Ютуб." />
     <MESSAGE value="Добавлена пагинация.&#10;Для класса Subscribe не были применены миграции - исправлено" />
     <MESSAGE value="ДЗ 26.1 выполнено" />
-    <option name="LAST_COMMIT_MESSAGE" value="ДЗ 26.1 выполнено" />
+    <MESSAGE value="ДЗ 26.1 исправлена ошибка" />
+    <option name="LAST_COMMIT_MESSAGE" value="ДЗ 26.1 исправлена ошибка" />
   </component>
 </project>

@@ -160,3 +160,9 @@ CELERY_TASK_TRACK_STARTED = True
 # Максимальное время на выполнение задачи
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'kipriyn.dima1997@gmail.com'
+EMAIL_HOST_PASSWORD = "Nokia1997D"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

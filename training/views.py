@@ -128,3 +128,35 @@ class GetPaymentView(APIView):
         payment_intent = stripe.PaymentIntent.retrieve(payment_id)
         print(payment_intent)
         return Response({'status': payment_intent.status, 'body': payment_intent})
+
+
+#
+
+class SubscribeCreateAPIView(generics.CreateAPIView):
+    queryset = Subscribe.objects.all()
+    serializer_class = SubscribeSerializer
+
+    # Создаем и сохраняем подписку
+    def perform_create(self, serializer, *args, **kwargs):
+        subscribe = serializer.save()  # получаем данные подписки
+        subscribe.user = self.request.user  # сохраняем данные о подписке в профиль пользователя
+        course_pk = self.kwargs.get('pk')  # сохраняем данные о подписке в профиль курс
+        subscribe.course = Course.objects.get(pk=course_pk)  # получаем нужную подписку
+        subscribe.save()
+
+
+class SubscribeDestroyAPIView(generics.DestroyAPIView):
+    queryset = Subscribe.objects.all()
+    serializer_class = SubscribeSerializer
+
+
+
+class SubscribeListAPIView(generics.ListAPIView):
+    queryset = Subscribe.objects.all()
+    serializer_class = SubscribeSerializer
+
+
+
+class SubscribeUpdateAPIView(generics.UpdateAPIView):
+    queryset = Subscribe.objects.all()
+    serializer_class = SubscribeSerializer
