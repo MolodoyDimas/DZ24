@@ -1,13 +1,14 @@
 from django.db import models
 from users.models import User
-from config.settings import AUTH_USER_MODEL
+from config import settings
 import stripe
 
 class Course(models.Model):
     name_course = models.CharField(max_length=100, verbose_name='Наименование Курса')
     picture = models.ImageField(upload_to='course/', verbose_name='Картинка', blank=True, null=True)
     description = models.CharField(max_length=500, verbose_name='Описание')
-    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Создатель')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Пользователь',
+                             null=True, blank=True)
 
     def __str__(self):
         return f'{self.name_course}'
@@ -23,9 +24,11 @@ class Lesson(models.Model):
     description = models.CharField(max_length=500, verbose_name='Описание')
     picture = models.ImageField(upload_to='lesson/', verbose_name='Картинка', blank=True, null=True)
     url_video = models.CharField(max_length=200, verbose_name='Ссылка на видео')
-    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Создатель')
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс', blank=True, null=True)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Пользователь',
+                             null=True, blank=True)
 
     def __str__(self):
         return f'{self.name_lesson}'
@@ -40,7 +43,7 @@ class Payments(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True, related_name='payments')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Пользователь',null=True, blank=True)
     payment_date = models.PositiveIntegerField(verbose_name='Дата платежа', null=True, blank=True)
     amount = models.IntegerField(default=0, verbose_name='Сумма оплаты')
     method = models.BooleanField(default=True, verbose_name='Оплата переводом')  # если наличные - False
@@ -57,7 +60,7 @@ class Payments(models.Model):
         ordering = ('user',)
 
 class Subscribe(models.Model):
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Пользователь',null=True, blank=True)
     is_active = models.BooleanField(default=False, verbose_name='Активность подписки')
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, verbose_name='Курс', null=True, blank=True)
 

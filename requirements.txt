@@ -1,0 +1,7 @@
+Запуск сервера redis в WSL
+    1- sudo apt-get update
+    2- sudo service redis-server start
+    3- redis-cli
+    4- ping
+
+    Если PONG - подключен

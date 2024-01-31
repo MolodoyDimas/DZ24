@@ -1,13 +1,13 @@
-from django.shortcuts import render
 from rest_framework import viewsets, generics
 from training.serializers import CourseSerializer, LessonSerializer, PaymentsSerializer, SubscribeSerializer
 from training.models import Course, Lesson, Payments, Subscribe
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from training.permissions import IsUser, IsModerator
+from users.permissions import IsUser, IsModerator
 from training.paginations import LessonPagination
 from requests import Response
+from rest_framework.response import Response
 from rest_framework.views import APIView
 import stripe
 
@@ -102,26 +102,29 @@ class SubscribeViewSet(viewsets.ModelViewSet):
 class PaymentsCreateApiView(generics.CreateAPIView):
     serializer_class = PaymentsSerializer
 
-    def payments_create(self, serializer):
-        new_payment = serializer.save()
-        stripe.api_key = 'pk_test_51OeDbXASb9i3kG2Vf4PrZ0b27t8CuJDWmGZ5NsjSr0vaRaJsMxndyH8msKKRYM9tEXJGvvscHjPTZvBJKdKxG3QP00vR0gmc1o'
-        payment_intent = stripe.PaymentIntent.create(
-            amount=int(new_payment.amount),
-            current='usd',
-            automatic_payment_methods={"enabled": True},
-        )
-        new_payment.session_id = payment_intent.id
-        new_payment.save()
-
     def perform_create(self, serializer):
         new_lesson = serializer.save()
         new_lesson.user = self.request.user
-        new_lesson.save()
+        new_payment = serializer.save()
+        stripe.api_key = 'pk_test_51OeDbXASb9i3kG2Vf4PrZ0b27t8CuJDWmGZ5NsjSr0vaRaJsMxndyH8msKKRYM9tEXJGvvscHjPTZvBJKdKxG3QP00vR0gmc1o'
+        payment_intent = stripe.PaymentIntent.create(
+            amount=2000,
+            currency="usd",
+            automatic_payment_methods={"enabled": True},
+        )
+        new_payment.session_id = payment_intent.id
+        new_payment.amount = payment_intent.amount
+        new_payment.save()
+
+        return super().perform_create(new_payment)
 
 
 class GetPaymentView(APIView):
 
     def get(self, request, payment_id):
-        stripe.api_key = 'pk_test_51OeDbXASb9i3kG2Vf4PrZ0b27t8CuJDWmGZ5NsjSr0vaRaJsMxndyH8msKKRYM9tEXJGvvscHjPTZvBJKdKxG3QP00vR0gmc1o'
+        payment = Payments.objects.get(pk=payment_id)
+        payment_id = payment.session_id
+        stripe.api_key = 'sk_test_51OdoXSHC8LUh8NqZQboynIwfP7znL7qfNqCOqOYkl7k3pzAKN8QU45ye5RpnABJ2MRjLBfk6tWWisTmY9QoiXJNR00NP3ImbNV'
         payment_intent = stripe.PaymentIntent.retrieve(payment_id)
-        return Response({'status': payment_intent.status, })
+        print(payment_intent)
+        return Response({'status': payment_intent.status, 'body': payment_intent})

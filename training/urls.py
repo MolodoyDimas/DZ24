@@ -21,7 +21,7 @@ urlpatterns = [
     path('payments/create/', PaymentsCreateAPIView.as_view(), name='payments-create'),
     path('course/', CourseViewSet.as_view({'get': 'list'}), name='course-view'),
     path('payments/', PaymentsListAPIView.as_view(), name='payments-list'),
-    path('payments/create/', PaymentsCreateApiView.as_view(), name='payments-list'),
+    path('payments/create/', PaymentsCreateApiView.as_view(), name='payments-create'),
     path('payments/<str:payment_id>/', GetPaymentView.as_view(), name='payment_get'),
     path('lesson/subscribe/', include(router.urls)),
         ] + router.urls
