@@ -10,6 +10,9 @@ class Course(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Пользователь',
                              null=True, blank=True)
 
+    date_update = models.DateTimeField(auto_now=True, null=True, blank=True)
+    date_preview = models.DateTimeField(auto_now=True, null=True, blank=True)
+
     def __str__(self):
         return f'{self.name_course}'
 

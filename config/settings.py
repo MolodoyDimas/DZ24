@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'training',
     'django_filters',
     'drf_yasg',
+    #'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -161,8 +162,10 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = 'kipriyn.dima1997@gmail.com'
-EMAIL_HOST_PASSWORD = "Nokia1997D"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+
+# Взял из предыдущей курсовой по рассылке писем на email
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'DmitryIsBack@yandex.ru'
+EMAIL_HOST_PASSWORD = 'plwhzghhersartnq'
+EMAIL_USE_SSL = True

@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93af6641-728f-4b37-8710-050c94300080" name="Changes" comment="ДЗ 26.1 исправлена ошибка">
-      <change afterPath="$PROJECT_DIR$/training/tasks.py" afterDir="false" />
+    <list default="true" id="93af6641-728f-4b37-8710-050c94300080" name="Changes" comment="ДЗ 26.2 сделано">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706701255834</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ДЗ 26.2 сделано">
+      <option name="closed" value="true" />
+      <created>1706703107268</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706703107268</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -157,6 +162,7 @@
     <MESSAGE value="Добавлена пагинация.&#10;Для класса Subscribe не были применены миграции - исправлено" />
     <MESSAGE value="ДЗ 26.1 выполнено" />
     <MESSAGE value="ДЗ 26.1 исправлена ошибка" />
-    <option name="LAST_COMMIT_MESSAGE" value="ДЗ 26.1 исправлена ошибка" />
+    <MESSAGE value="ДЗ 26.2 сделано" />
+    <option name="LAST_COMMIT_MESSAGE" value="ДЗ 26.2 сделано" />
   </component>
 </project>

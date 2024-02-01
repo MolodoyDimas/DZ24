@@ -10,12 +10,20 @@ from requests import Response
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import stripe
+from datetime import datetime
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticated, IsModerator, IsUser]
     pagination_class = LessonPagination
+
+    def partial_update(self, request, pk=None):
+        course = self.get_object()
+        course.date_update = datetime.now()
+        course.save(update_fields=['date_update'])
+        serializer = self.get_serializer(course)
+        return Response(serializer.data)
 
     def get_queryset(self):
         if self.request.user.role == "member":
@@ -136,13 +144,13 @@ class SubscribeCreateAPIView(generics.CreateAPIView):
     queryset = Subscribe.objects.all()
     serializer_class = SubscribeSerializer
 
-    # Создаем и сохраняем подписку
-    def perform_create(self, serializer, *args, **kwargs):
-        subscribe = serializer.save()  # получаем данные подписки
-        subscribe.user = self.request.user  # сохраняем данные о подписке в профиль пользователя
-        course_pk = self.kwargs.get('pk')  # сохраняем данные о подписке в профиль курс
-        subscribe.course = Course.objects.get(pk=course_pk)  # получаем нужную подписку
-        subscribe.save()
+    # # Создаем и сохраняем подписку
+    # def perform_create(self, serializer, *args, **kwargs):
+    #     subscribe = serializer.save()  # получаем данные подписки
+    #     subscribe.user = self.request.user  # сохраняем данные о подписке в профиль пользователя
+    #     course_pk = self.kwargs.get('pk')  # сохраняем данные о подписке в профиль курс
+    #     subscribe.course = Course.objects.get(pk=course_pk)  # получаем нужную подписку
+    #     subscribe.save()
 
 
 class SubscribeDestroyAPIView(generics.DestroyAPIView):
