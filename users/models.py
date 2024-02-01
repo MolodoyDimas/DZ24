@@ -42,6 +42,7 @@ class User(AbstractUser):
     role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.MEMBER)
 
     last_login = models.DateTimeField(auto_now=True, verbose_name='Последний вход', blank=True, null=True)
+    is_active = models.BooleanField(default=True, verbose_name="Пользователь активен")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

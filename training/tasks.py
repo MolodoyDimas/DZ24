@@ -29,7 +29,7 @@ def check_update():
     для каждого пользователя вычитать из текущего времени время последнего его входа.'''
     a = timezone.now()
     for i in User.objects.all():
-        count_date = a - i.last_login.replace(tzinfo=timezone.utc)
+        count_date = a - i.is_active.replace(tzinfo=timezone.utc)
         if count_date > datetime.timedelta(days=30):
-            i.role = 'member'
+            i.is_active = False
             i.save()

@@ -110,18 +110,23 @@ class SubscribeViewSet(viewsets.ModelViewSet):
 
 class PaymentsCreateAPIView(generics.CreateAPIView):
     serializer_class = PaymentsSerializer
-    payment_service = PaymentService(api_key='sk_test_51OeDbXASb9i3kG2Vf4PrZ0b27t8CuJDWmGZ5NsjSr0vaRaJsMxndyH8msKKRYM9tEXJGvvscHjPTZvBJKdKxG3QP00vR0gmc1o')
+    payment_service = PaymentService()
 
     def perform_create(self, serializer):
-        self.payment_service.create_payment(serializer, self.request.user)
+        payment_intent = self.payment_service.create_payment_intent()
+
+        new_payment = serializer.save(
+            user=self.request.user,
+            session_id=payment_intent.id,
+            amount=payment_intent.amount
+        )
 
 
 class GetPaymentView(APIView):
 
     def get(self, request, payment_id):
-        service = PaymentService('sk_test_51OdoXSHC8LUh8NqZQboynIwfP7znL7qfNqCOqOYkl7k3pzAKN8QU45ye5RpnABJ2MRjLBfk6tWWisTmY9QoiXJNR00NP3ImbNV')
-        payment_intent = service.get_payment_intent(payment_id)
-        return Response({'status': payment_intent.status, 'body': payment_intent})
+        payment_intent = get_payment(payment_id)
+        return Response({'status': payment_intent.status, 'body': str(payment_intent)})
 
 
 
