@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -169,3 +170,11 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'DmitryIsBack@yandex.ru'
 EMAIL_HOST_PASSWORD = 'plwhzghhersartnq'
 EMAIL_USE_SSL = True
+
+# Запускает проверку активности
+CELERY_BEAT_SCHEDULE = {
+    'update_user_activity': {
+        'task': 'training.tasks.check_update',
+        'schedule': datetime.timedelta(days=1),
+    },
+}
